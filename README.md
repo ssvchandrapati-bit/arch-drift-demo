@@ -1,4 +1,5 @@
-Architectural Drift Guard with IBM Bob
+*Architectural Drift Guard with IBM Bob*
+
 An automated, AI-driven architectural governance agent built for the IBM TechXchange Dev Day Hackathon.
 
 Standard CI/CD linters catch syntax errors and formatting issues, but they are blind to high-level system topology breaches. Architectural Drift Guard continuously audits incoming GitHub Pull Requests against a plain-language architecture rules file, calculates an dynamic urgency score, flags structural drift, and leverages IBM Bob to automatically refactor violating code back into compliance.
