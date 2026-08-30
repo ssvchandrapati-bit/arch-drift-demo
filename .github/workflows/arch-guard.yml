@@ -1,0 +1,31 @@
+name: Architectural Drift Guard
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  analyze-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: |
+          npm init -y
+          npm install dotenv @octokit/rest
+
+      - name: Run Architecture Agent
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          PR_NUMBER: ${{ github.event.number }}
+          POST_COMMENT: '1'
+        run: node arch-guard-agent/agent.js
